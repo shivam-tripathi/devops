@@ -1,4 +1,4 @@
-version = '1.0'
+version = '1.0.1'
 
 apply plugin: 'java'
 apply plugin: 'application'
@@ -11,20 +11,14 @@ repositories {
 }
 
 dependencies {
+	compileOnly 'org.projectlombok:lombok:1.18.12'
+	annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
 	implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.820')
 	implementation 'com.amazonaws:aws-java-sdk-iam'
 	implementation 'com.amazonaws:aws-java-sdk-ec2'
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.11.1'
 }
 
 mainClassName = 'com/devops/Main'
 
-task jarify(type: Jar) {
-	manifest {
-        attributes 'Implementation-Title': 'Gradle Jar File Example',
-        	'Implementation-Version': version,
-        	'Main-Class': 'com.actions.Main'
-    }
-    baseName = project.name
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
-}
