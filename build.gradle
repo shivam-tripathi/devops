@@ -2,8 +2,6 @@ version = '1.0.1'
 
 apply plugin: 'java'
 apply plugin: 'application'
-sourceCompatibility = 14.0
-targetCompatibility = 14.0
 
 repositories {
 	mavenCentral()
@@ -17,6 +15,7 @@ dependencies {
 	implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.820')
 	implementation 'com.amazonaws:aws-java-sdk-iam'
 	implementation 'com.amazonaws:aws-java-sdk-ec2'
+	implementation 'com.amazonaws:aws-java-sdk-ecs'
 	implementation 'com.amazonaws:aws-java-sdk-costexplorer:1.11.822'
 	implementation 'com.amazonaws:aws-java-sdk-sqs:1.11.822'
 	implementation 'com.fasterxml.jackson.core:jackson-core:2.11.1'
