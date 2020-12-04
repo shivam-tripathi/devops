@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class ECSCluster {
+public class EcsCluster {
   private final String arn;
 
   public List<String> listAllServiceArns() {
@@ -27,15 +27,15 @@ public class ECSCluster {
     return res;
   }
 
-  public List<ECSService> listAllECSServices() {
+  public List<EcsService> listAllECSServices() {
     return listAllServiceArns()
             .stream()
-            .map(serviceArn -> new ECSService(serviceArn, arn))
+            .map(serviceArn -> new EcsService(serviceArn, arn))
             .collect(Collectors.toList());
   }
 
   public void restartAllServices() {
-    listAllServiceArns().forEach(serviceArn -> new ECSService(serviceArn, arn).forceNewDeployment());
+    listAllServiceArns().forEach(serviceArn -> new EcsService(serviceArn, arn).forceNewDeployment());
   }
 
   public void restartAllServices(String matchingRegex, String notMatchingRegex) {
@@ -46,7 +46,7 @@ public class ECSCluster {
               boolean shouldMatchHolds = matching == null || matching.matcher(serviceArn).matches();
               boolean shouldNotMatchHolds = notMatching == null || !notMatching.matcher(serviceArn).matches();
               if (shouldMatchHolds && shouldNotMatchHolds) {
-                new ECSService(serviceArn, this.arn).forceNewDeployment();
+                new EcsService(serviceArn, this.arn).forceNewDeployment();
               }
             });
   }

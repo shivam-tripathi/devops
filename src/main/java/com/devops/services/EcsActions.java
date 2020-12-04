@@ -2,9 +2,9 @@ package com.devops.services;
 
 import com.amazonaws.services.ecs.model.DescribeTasksRequest;
 import com.amazonaws.services.ecs.model.Task;
-import com.devops.aws.ecs.ECSCluster;
+import com.devops.aws.ecs.EcsCluster;
 import com.devops.aws.ecs.EcsHelper;
-import com.devops.aws.ecs.ECSService;
+import com.devops.aws.ecs.EcsService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class ECSActions {
+public class EcsActions {
   /**
    * Force restarts all services in the cluster without changing anything else
    *
@@ -20,7 +20,7 @@ public class ECSActions {
    */
   public void forceRestartServices(List<String> clusterArns) {
     clusterArns.forEach(clusterArn -> {
-      new ECSCluster(clusterArn).restartAllServices(null, ".*socket.*");
+      new EcsCluster(clusterArn).restartAllServices(null, ".*socket.*");
     });
   }
 
@@ -33,11 +33,11 @@ public class ECSActions {
   public void validateTasks(Long timestamp, String[] clusterArns) {
     for (String clusterArn : clusterArns) {
       System.out.println("Cluster: " + clusterArn);
-      new ECSCluster(clusterArn).listAllServiceArns().forEach(serviceArn -> {
+      new EcsCluster(clusterArn).listAllServiceArns().forEach(serviceArn -> {
         if (Pattern.compile(".*socket.*").matcher(serviceArn).matches()) {
           return;
         }
-        ECSService service = new ECSService(serviceArn, clusterArn);
+        EcsService service = new EcsService(serviceArn, clusterArn);
         List<String> taskArns = service.listAllTaskArns();
         System.out.println("\tService: " + serviceArn + " :: Tasks " + taskArns.size());
         int index = 0;

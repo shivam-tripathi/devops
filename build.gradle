@@ -16,8 +16,9 @@ dependencies {
 	implementation 'com.amazonaws:aws-java-sdk-iam'
 	implementation 'com.amazonaws:aws-java-sdk-ec2'
 	implementation 'com.amazonaws:aws-java-sdk-ecs'
-	implementation 'com.amazonaws:aws-java-sdk-costexplorer:1.11.822'
-	implementation 'com.amazonaws:aws-java-sdk-sqs:1.11.822'
+	implementation 'com.amazonaws:aws-java-sdk-cloudwatch'
+	implementation 'com.amazonaws:aws-java-sdk-costexplorer'
+	implementation 'com.amazonaws:aws-java-sdk-sqs'
 	implementation 'com.fasterxml.jackson.core:jackson-core:2.11.1'
 }
 

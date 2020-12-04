@@ -11,7 +11,7 @@ import com.amazonaws.services.ec2.model.Tag;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Volumes {
+public class Ec2Volumes {
   public void addTagsToVolumesByInstanceTagName(String instanceTagName, Tag[] tags) {
     AmazonEC2 ec2Client = Ec2Helper.getClient();
     Reservation result = ec2Client.describeInstances(

@@ -6,12 +6,15 @@ import com.amazonaws.services.ecs.model.UpdateServiceRequest;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.ToString;
 
 
 @AllArgsConstructor
 @Getter
-public class ECSService {
+@ToString
+public class EcsService {
   private final String arn;
   private final String clusterArn;
 
@@ -34,14 +37,6 @@ public class ECSService {
     } while (token != null);
 
     return res;
-  }
-
-  @Override
-  public String toString() {
-    return "ECSService{"
-            + "serviceArn='" + arn + '\''
-            + ", clusterArn='" + clusterArn + '\''
-            + '}';
   }
 }
 
