@@ -106,7 +106,7 @@ public class CloudwatchAlarms {
             String.format(
                     "Disk usage for /media/mon is greater than %s on %s", MONGO_DISK_THRESHOLD, instanceDetails.name
             ),
-            "UtilizedDisk-/media/mon",
+            "UtilizedDisk-/media/mongo",
             "EC2/Info",
             Collections.singletonList(new Dimension().withName("Machine").withValue(instanceDetails.name)),
             MONGO_DISK_THRESHOLD,

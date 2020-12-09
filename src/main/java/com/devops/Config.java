@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,11 +38,68 @@ public class Config {
   public static class Infra {
     InfraRabbit rabbit;
   }
-  private Map<String, String> subnets;
-  private Map<String, String> securityGroups;
-  private CloudwatchConfig cloudwatch;
-  private Infra infra;
-  private String env;
+
+  @Getter
+  @Setter
+  @ToString
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class SSM {
+    @Getter
+    @Setter
+    @ToString
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Mongo {
+      public String prod;
+      public String game;
+      public String dev;
+    }
+
+    public Mongo mongo;
+  }
+
+  @Getter
+  @Setter
+  @ToString
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class ECS {
+    public List<String> services;
+  }
+
+  @Getter
+  @Setter
+  @ToString
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class Vpc {
+    @Getter
+    @Setter
+    @ToString
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class VpcConf {
+      public String id;
+      public HashMap<String, String> publicSubnets;
+      public HashMap<String, String> privateSubnets;
+    }
+    public VpcConf prod;
+    public VpcConf dev;
+  }
+
+  @Getter
+  @Setter
+  @ToString
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class Iam {
+    public String ec2MetricsInstanceProfileArn;
+  }
+
+  public Map<String, String> subnets;
+  public Map<String, String> securityGroups;
+  public CloudwatchConfig cloudwatch;
+  public Infra infra;
+  public String env;
+  public SSM ssm;
+  public ECS ecs;
+  public Vpc vpc;
+  public Iam iam;
 
   private static Config config = null;
 

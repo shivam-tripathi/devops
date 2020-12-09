@@ -4,9 +4,10 @@ import com.amazonaws.services.identitymanagement.AmazonIdentityManagement;
 import com.amazonaws.services.identitymanagement.AmazonIdentityManagementClientBuilder;
 import com.amazonaws.services.identitymanagement.model.AddRoleToInstanceProfileRequest;
 import com.amazonaws.services.identitymanagement.model.CreateInstanceProfileRequest;
+import com.amazonaws.services.identitymanagement.model.GetInstanceProfileRequest;
 import com.amazonaws.services.identitymanagement.model.InstanceProfile;
 
-public class IAMHelper {
+public class IamHelper {
   private static AmazonIdentityManagement iamClient = null;
 
   public static AmazonIdentityManagement getClient() {
@@ -19,7 +20,7 @@ public class IAMHelper {
   }
 
   public void createInstanceProfile(String profileName, String... roleNames) {
-    AmazonIdentityManagement iamClient = IAMHelper.getClient();
+    AmazonIdentityManagement iamClient = IamHelper.getClient();
     InstanceProfile profile = iamClient.createInstanceProfile(
             new CreateInstanceProfileRequest()
                     .withInstanceProfileName(profileName)
@@ -34,5 +35,10 @@ public class IAMHelper {
                       .withRoleName(roleName)
       );
     }
+  }
+
+  public void getInstanceProfile(String roleName) {
+    AmazonIdentityManagement iamClient = IamHelper.getClient();
+    iamClient.getInstanceProfile(new GetInstanceProfileRequest());
   }
 }
