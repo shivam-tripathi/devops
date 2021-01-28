@@ -10,7 +10,7 @@ import java.util.function.Function;
 public class BatchExecute<I, R> {
   private final int batchSize;
   private final int timeOut;
-  private List<I> inputs;
+  private final List<I> inputs;
   private final List<R> outputs;
   private final Function<Integer, R> processFunction;
   public BatchExecuteResult<R> batchExecuteResult;
